@@ -21,14 +21,22 @@ int main(){
 		a[i] = -1000 + rand() % 2001; 
 	}
 	
+	int a2[n]; 
 	
-	cout<<"1. Insercion Directa. "<<endl; 
-	cout<<"2. Ordenacion por shellsort"<<endl; 
-	cin>>opcion;   
+	for(int i=0; i<n; i++){
+		a2[i] = a[i]; 
+	}
 	
 	// Variables para medir el tiempo
 	auto start = chrono::high_resolution_clock::now(); 
 	auto end = chrono::high_resolution_clock::now();
+	
+	do{
+		
+	cout<<"\n1. Insercion Directa. "<<endl; 
+	cout<<"2. Ordenacion por shellsort"<<endl;
+	cout<<"3. Salir. "<<endl;  
+	cin>>opcion;   
 	
 	switch(opcion){
 		case 1:{
@@ -36,21 +44,32 @@ int main(){
 			insercionDirecta(a, n); 
 			end = chrono::high_resolution_clock::now();
 			mostrarArreglo(a, n);
+			// Calcular la duración
+			chrono::duration<double> duration = end - start;
+   	 		cout << "\nTiempo de ejecucion: " << duration.count() << " segundos" << endl;
+   	 		cout<<endl;
 			break;
 		}
 		case 2:{
 			start = chrono::high_resolution_clock::now();
-			shellSort(a, n); 
+			shellSort(a2, n); 
 			end = chrono::high_resolution_clock::now();
-			mostrarArreglo(a, n);
+			mostrarArreglo(a2, n);
+			// Calcular la duración
+			chrono::duration<double> duration = end - start;
+   	 		cout << "\nTiempo de ejecucion: " << duration.count() << " segundos" << endl;
+   	 		cout<<endl;  
+			break;
+		}
+		default:{
+			cout<<"Opcion invalida. "; 
+		
 			break;
 		}
 	}
 	
-	// Calcular la duración
-	chrono::duration<double> duration = end - start;
-    cout << "\nTiempo de ejecucion: " << duration.count() << " segundos" << endl;
-    
+	}while(opcion != 0); 
+	
 	return 0; 
 }
 
