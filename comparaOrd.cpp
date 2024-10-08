@@ -10,7 +10,7 @@ void insercionDirecta(int a[], int n);
 void shellSort(int array[], int n);
 
 int main(){
-	int n = 100; 
+	int n = 10000; 
 	int opcion; 
 	
 	srand(time(NULL)); 
@@ -18,7 +18,7 @@ int main(){
 	int a[n]; 
 	
 	for(int i=0; i<n; i++){
-		a[i] = -1000 + rand() % 1000; 
+		a[i] = -1000 + rand() % 2001; 
 	}
 	
 	
@@ -26,23 +26,29 @@ int main(){
 	cout<<"2. Ordenacion por shellsort"<<endl; 
 	cin>>opcion;   
 	
-	auto start = chrono::high_resolution_clock::now(); // Iniciar el tiempo
+	// Variables para medir el tiempo
+	auto start = chrono::high_resolution_clock::now(); 
+	auto end = chrono::high_resolution_clock::now();
 	
 	switch(opcion){
 		case 1:{
+			start = chrono::high_resolution_clock::now(); // Iniciar el tiempo
 			insercionDirecta(a, n); 
+			end = chrono::high_resolution_clock::now();
 			mostrarArreglo(a, n);
 			break;
 		}
 		case 2:{
+			start = chrono::high_resolution_clock::now();
 			shellSort(a, n); 
+			end = chrono::high_resolution_clock::now();
 			mostrarArreglo(a, n);
 			break;
 		}
 	}
 	
-	auto end = chrono::high_resolution_clock::now(); // Terminar el tiempo
-    chrono::duration<double> duration = end - start; // Calcular la duración
+	// Calcular la duraciÃ³n
+	chrono::duration<double> duration = end - start;
     cout << "\nTiempo de ejecucion: " << duration.count() << " segundos" << endl;
     
 	return 0; 
