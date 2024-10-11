@@ -8,24 +8,19 @@ using namespace std;
 void mostrarArreglo(int a[], int n);
 void insercionDirecta(int a[], int n);
 void shellSort(int array[], int n);
+void generarArreglo(int[],int); 
+void copiarArreglo(int [], int[], int); 
 
 int main(){
-	int n = 10000; 
+	int n = 10000, contador =0; 
 	int opcion; 
 	
 	srand(time(NULL)); 
 	
-	int a[n]; 
+	int a[n], a2[n]; 
 	
-	for(int i=0; i<n; i++){
-		a[i] = -1000 + rand() % 2001; 
-	}
-	
-	int a2[n]; 
-	
-	for(int i=0; i<n; i++){
-		a2[i] = a[i]; 
-	}
+	generarArreglo(a, n); 	
+	copiarArreglo(a,a2, n);
 	
 	// Variables para medir el tiempo
 	auto start = chrono::high_resolution_clock::now(); 
@@ -40,6 +35,7 @@ int main(){
 	
 	switch(opcion){
 		case 1:{
+			contador++; 
 			start = chrono::high_resolution_clock::now(); // Iniciar el tiempo
 			insercionDirecta(a, n); 
 			end = chrono::high_resolution_clock::now();
@@ -51,6 +47,7 @@ int main(){
 			break;
 		}
 		case 2:{
+			contador++; 
 			start = chrono::high_resolution_clock::now();
 			shellSort(a2, n); 
 			end = chrono::high_resolution_clock::now();
@@ -66,6 +63,11 @@ int main(){
 		
 			break;
 		}
+	}
+		
+	if(contador%2==0){
+		generarArreglo(a, n); 	
+		copiarArreglo(a,a2, n); 
 	}
 	
 	}while(opcion != 0); 
@@ -98,7 +100,7 @@ void shellSort(int array[], int n){
 	while(k>1){
 		k=k/2;
 		cen = 1;
-		while(cen == 1){
+		while(cen == 1){ 
 			cen = 0;
 			int i = 0;
 			while(i+k <= n-1){
@@ -111,6 +113,18 @@ void shellSort(int array[], int n){
 				i++;
 			}
 		}
+	}
+}
+
+void generarArreglo(int a[], int n){
+	for(int i=0; i<n; i++){
+		a[i] = -1000 + rand() % 10001; 
+	}
+}
+
+void copiarArreglo(int a[],int a2[], int n){
+	for(int i=0; i<n; i++){
+		a2[i] = a[i]; 
 	}
 }
 
